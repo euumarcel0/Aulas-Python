@@ -1,0 +1,22 @@
+en
+conf t
+hostname rt1
+ip domain-name its.local
+username admin privilege 15 secret Its00
+crypto key generate rsa general-keys modulus 1024
+line vty 0 15
+transport input ssh telnet
+login local
+exit
+int g0/0
+mac-address 0011.2233.0001
+no shut
+ip address dhcp
+exit
+int g0/1
+no shut
+ip address 192.168.1.1 255.255.255.0
+ip helper-address 10.1.1.182
+exit
+ip ssh version 2
+do wr

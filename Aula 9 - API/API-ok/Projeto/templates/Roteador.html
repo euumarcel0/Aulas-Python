@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://i.ibb.co/kxWYk3Q/LOGO.png" type="image/x-icon" />
+    <title>Roteador</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://i.ibb.co/kxWYk3Q/LOGO.png">
+                </a>
+            </div>
+            <ul class="menu">
+                <button class="btn-custom" id="script">Rodar Script</button>
+                <button class="btn-custom" onclick="enviarRequisicao('2', 'Roteador')">Fazer Backup</button>
+                <button class="btn-custom" onclick="enviarRequisicao('3', 'Roteador')">Criar Usuário</button>
+                <button class="btn-custom" onclick="enviarRequisicao('4', 'Roteador')">Configurações</button>
+                <button class="btn-custom" onclick="enviarRequisicao('5', 'Roteador')">Configurar Banner</button>
+            </ul>
+        </nav>
+        <div class="text-content">
+            <h2>Selecione a função de configuração do Roteador:</h2>
+            <p>ㅤ</p>
+            <p>"Automatizando a Eficiência: Gerenciamento Avançado de Equipamentos Cisco com Python e API"</p>
+        </div>
+        <div class="play-button">
+            <a scr="https://github.com/euumarcel0"></a>
+            <span class="play">GITHUB</span>
+            <i class="fas fa-play" onclick="redirectToGithub()"></i>
+        </div>
+        <script>
+            const bodyRequest = {
+                        "equipamento": "Roteador",
+                        "opcao": "5"
+                    }
+
+            async function getScript() {
+                const res = await fetch('http://localhost:5000/executar', {
+                    body: JSON.stringify(bodyRequest),
+                    headers:{
+                        'Content-Type':"application/json"
+                    },
+                    method:'POST'
+                })
+
+
+                let data = await res.json()
+
+                data = data.result
+
+                console.log(data)
+                alert(data.Mensagem);
+
+                const array = data["Configurações Atual"].map(item => {
+                })
+                
+                alert(data['Configurações Atual'].join("\n"))
+                console.log(data['Configurações Atual'].join("\n"))
+            }
+
+
+            document.getElementById('script').addEventListener('click', function () {
+                try {
+                    getScript()
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        </script>
+    </header>
+</body>
+
+</html>

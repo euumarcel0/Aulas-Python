@@ -1,0 +1,51 @@
+<powershell>
+# Script para instalação automatizada de Chrome, Visual Studio Code e Anaconda com Jupyter Notebook no Windows Server 2022
+
+# Especifique o caminho onde deseja salvar o instalador do Anaconda
+$anaconda_installer_path = "C:\Users\Administrator\Downloads\Anaconda3-2021.11-Windows-x86_64.exe"
+
+# Baixando o instalador do Anaconda...
+Write-Output "Baixando o instalador do Anaconda..."
+Invoke-WebRequest -Uri 'https://repo.anaconda.com/archive/Anaconda3-2021.11-Windows-x86_64.exe' -OutFile $anaconda_installer_path
+
+# Especifique o caminho onde deseja salvar o instalador do Anaconda
+$anaconda_installer_path = "C:\Users\Administrator\Downloads\Anaconda3-2021.11-Windows-x86_64.exe"
+
+# Executando o instalador do Anaconda
+Write-Output "Instalando o Anaconda..."
+& $anaconda_installer_path /S /D=$($env:ProgramFiles)\Anaconda3
+
+# Adicionando Anaconda ao PATH do sistema
+$anaconda_installation_path = "$($env:ProgramFiles)\Anaconda3"
+$env:Path += ";$anaconda_installation_path;$anaconda_installation_path\Scripts;$anaconda_installation_path\Library\bin"
+
+# Define o diretório temporário para baixar os arquivos
+$TEMP_DIR=$env:TEMP + "\installer_temp"
+
+# Cria o diretório temporário se não existir
+if (!(Test-Path -Path $TEMP_DIR -PathType Container)) {
+    New-Item -Path $TEMP_DIR -ItemType Directory | Out-Null
+}
+
+# Baixando o instalador do Google Chrome
+Write-Output "Baixando o instalador do Google Chrome..."
+Invoke-WebRequest -Uri 'https://dl.google.com/chrome/install/latest/chrome_installer.exe' -OutFile "$TEMP_DIR\chrome_installer.exe"
+
+# Executando o instalador do Google Chrome
+Write-Output "Instalando o Google Chrome..."
+Start-Process -FilePath "$TEMP_DIR\chrome_installer.exe" -ArgumentList "/silent", "/install" -Wait
+
+# Removendo o instalador do Google Chrome
+Remove-Item -Path "$TEMP_DIR\chrome_installer.exe" -Force
+
+# Baixando o instalador do Visual Studio Code na pasta Downloads
+$vscode_installer_path = "$env:USERPROFILE\Downloads\vscode_installer.exe"
+Write-Output "Baixando o instalador do Visual Studio Code..."
+Invoke-WebRequest -Uri 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user' -OutFile $vscode_installer_path
+
+# Executando o instalador do Visual Studio Code
+Write-Output "Instalando o Visual Studio Code..."
+Start-Process -FilePath $vscode_installer_path -ArgumentList "/silent", "/install" -Wait
+
+Write-Output "Instalação concluída."
+</powershell>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://i.ibb.co/kxWYk3Q/LOGO.png" type="image/x-icon"/>
+    <title>Contact</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://i.ibb.co/kxWYk3Q/LOGO.png">
+            </a>
+        </div>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="latest.html">Latest</a></li>
+            <li><a href="offers.html">Offers</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="buttons">
+            <input type="button" value="Switch" id="switchButton">
+            <input type="button" value="Roteador" id="roteadorButton">
+        </div>
+    </nav>
+    <div class="text-content">
+        <h2></h2>
+        <p>ㅤ</p>
+        <p>ㅤ</p>
+        </div>
+        <div class="play-button">
+            <span class="play">GITHUB</span>
+            <i class="fas fa-play" onclick="redirectToGithub()"></i>
+        </div>
+        <div class="contact-form">
+            <h2>Entre em contato conosco</h2>
+            <form>
+                <input type="text" id="name" name="name" placeholder="Nome" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <textarea id="message" name="message" placeholder="Mensagem" required></textarea>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+        
+    </header>
+    <script>
+        document.getElementById('roteadorButton').addEventListener('click', function() {
+            window.location.href = 'Roteador.html?equipamento=Roteador';
+        });
+        document.getElementById('switchButton').addEventListener('click', function() {
+            window.location.href = 'Switch.html?equipamento=Switch';
+        });
+        function redirectToGithub() {
+                    window.location.href = "https://github.com/euumarcel0";
+                }
+    </script>
+</body>
+</html>
